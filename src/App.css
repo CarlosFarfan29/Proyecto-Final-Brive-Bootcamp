@@ -1,18 +1,20 @@
 @import url("./css/rickymorty.css");
 @import url("./css/occmundial/login.css");
 @import url("./css/occmundial/empresas.css");
+@import url("./css/occmundial/navbar.css");
 
 
 :root {
   /* Proyecto Final Vars */
   --primary-color: #3E6074;
   --secondary-color: #628196;
-  --terciary-color: #E4B485;
+  --terciary-color: #da9959;
 
   --dark: #284455;
   --light: #EEEADE;
   --pink: #D6A698;
   --error: #dc3545;
+  --orange: #e0844e;
 
   /*Rick y Morty vars */
   --white: whitesmoke;
