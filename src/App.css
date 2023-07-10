@@ -1,0 +1,53 @@
+@import url("./css/rickymorty.css");
+@import url("./css/occmundial/login.css");
+
+
+:root {
+  /* Proyecto Final Vars */
+  --primary-color: #3E6074;
+  --secondary-color: #628196;
+  --terciary-color: #E4B485;
+
+  --dark: #284455;
+  --light: #EEEADE;
+  --pink: #D6A698;
+  --error: #dc3545;
+
+  /*Rick y Morty vars */
+  --white: whitesmoke;
+  --black: #252525;
+  --green: #71EA00;
+}
+
+body {
+  font-family: "Gill Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+
+.title-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.subtitle-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.description {
+  font-size: 1.3rem;
+  color: var(--secondary-color);
+
+}
+

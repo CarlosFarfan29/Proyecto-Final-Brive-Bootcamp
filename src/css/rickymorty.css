@@ -1,0 +1,350 @@
+
+/* HEADER */
+.Header {
+    display: flex;
+    width: 100%;
+    /* Siempre declarar el ancho de un componente */
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0px;
+    /* padding vertical */
+    background-color: var(--black);
+    color: var(--white);
+  }
+  
+  .Logo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .Terms {
+    font-size: 24px;
+  }
+  
+  /* Fin HEADER */
+  
+  /* HERO */
+  .Hero {
+    background-image: url("/public/img/hero.jpg");
+    width: 100%;
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Forzar tamaño de la imagen */
+    background-position: center;
+  
+    /* Centrar contenido div */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* pone un texto debajo del otro */
+  
+    /* Estilos texto*/
+    color: var(--white);
+  
+  }
+  
+  .Hero-title {
+    font-size: 50px;
+  }
+  
+  
+  .Hero-subtitle {
+    font-size: 30px;
+    margin: 0;
+    padding: 0 5px;
+  }
+  
+  /* Fin HERO */
+  
+  /* MAIN */
+  main {
+    background-color: var(--black);
+    padding: 0 5% 5% 5%;
+  }
+  
+  .main-title {
+    text-align: center;
+    color: var(--white);
+    padding-top: 30px;
+    margin: 0;
+  }
+  
+  .custom-hr {
+    border: none;
+    height: 1px;
+    background-color: var(--white);
+  }
+  
+  
+  /* Fin MAIN*/
+  
+  /* CARD */
+  .card-container-rym {
+    display: flex;
+    flex-wrap: wrap;
+    /* evita que se desborden los cards de su contenedor padre */
+    justify-content: space-between;
+    padding-top: 5%;
+  
+  }
+  
+  .card-rym {
+    background-color: rgba(153, 153, 153, 0.4);
+    display: flex;
+    border-radius: 5px;
+    width: 220px;
+    height: 450px;
+    flex-direction: column;
+    margin: 0 20px 30px 0;
+    /* Aplica valores de margen individualmente: superior, derecho, inferior, izquierdo */
+    overflow: hidden;
+    /* Evita el desbordamiento del contenido */
+  
+  }
+  
+  .card-rym h2 {
+    font-size: 14px;
+    color: var(--white);
+    text-align: center;
+    background-color: var(--black);
+  }
+  
+  .card-description-rym {
+    width: 100%;
+    color: var(--white);
+    font-size: 14px;
+    padding: 10px 5px;
+    overflow: hidden;
+  
+  }
+  
+  .card-button-rym {
+    margin-top: auto;
+    color: var(--white);
+    background-color: var(--green);
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+    /* Aplica esquina redondeada solo en la parte inferior */
+    justify-content: center;
+  }
+  
+  .card-button-rym:hover {
+    box-shadow: 0px -4px 8px var(--green);
+  }
+  
+  /* Fin CARD */
+  
+  /* PAGINACION */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    /* Alineación horizontal */
+    align-items: center;
+    /* Alineación vertical */
+  
+    padding: 10px 0 40px 0;
+    /* superior, derecho, inferior, izquierdo */
+    background-color: var(--black);
+    color: var(--white);
+  }
+  
+  .pagination p {
+    margin: 0 10px 0 10px;
+  }
+  
+  .prev-button,
+  .next-button {
+    padding: 10px 20px;
+    background-color: var(--green);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .prev-button:hover,
+  .next-button:hover {
+    box-shadow: 0px -4px 8px var(--green);
+  }
+  
+  
+  /* Fin PAGINACION */
+  
+  /* FOOTER */
+  .clearfix {
+    float: none;
+    clear: both;
+  }
+  
+  footer {
+    width: 100%;
+    background-color: var(--black);
+  
+    padding: 20px 0 20px 0;
+    /* superior, derecho, inferior, izquierdo */
+  
+    color: var(--white);
+    font-size: 20px;
+  
+    display: flex;
+    justify-content: space-around;
+  
+    align-items: center;
+    /* Alineación vertical */
+  }
+  
+  .Logo-footer {
+    width: 40px;
+    height: 40px;
+  }
+  
+  /* Fin FOOTER */
+  
+  
+  /* INFO COMPONENT */
+  
+  
+  /* Fin INFO COMPONENT */
+  
+  
+  /*    TERMS Privacy */
+  .terms-privacy {
+    padding: 10px 50px;
+    background-color: var(--black);
+    color: var(--white);
+    height: 90vh;
+  }
+  
+  /*FIN TERMS Privacy*/
+  
+  
+  
+  
+  /***  Chraracter Info  ***/
+  
+  .character-list {
+    padding: 10px 50px;
+    background-color: var(--black);
+  }
+  
+  .character-list h2 {
+    text-align: center;
+    color: var(--white);
+  }
+  
+  .characterinfo {
+    background-color: var(--black);
+  }
+  
+  .characterinfo-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    color: var(--white);
+  }
+  
+  .characterinfo-left {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .characterinfo-image {
+    height: 90vh;
+  }
+  
+  .characterinfo-right {
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid var(--white);
+    padding: 10px 30px;
+  }
+  
+  .characterinfo-name {
+    text-align: center;
+    border-bottom: 1px solid var(--white);
+    padding-bottom: 15px;
+    width: 95%;
+  }
+  
+  .characterinfo-list {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    height: auto;
+    gap: 10px;
+    width: 90%;
+  }
+  
+  .characterinfo-episode {
+    background-color: var(--green);
+    color: var(--white);
+    padding: 10px;
+    min-width: 20px;
+    text-align: center;
+  }
+  
+  .characterinfo-footer {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  .characterinfo-button {
+    background-color: var(--green);
+    color: var(--white);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .characterinfo-button:hover {
+    box-shadow: 0px -4px 8px var(--green);
+  }
+  
+  .characterinfo-pages {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .characterinfo-change_page {
+    background-color: var(--green);
+    color: var(--white);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
+  .characterinfo-change_page:hover:not(:disabled) {
+    box-shadow: 0px -4px 8px var(--green);
+  }
+  
+  .characterinfo-change_page:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  
+  .characterinfo-number {
+    color: var(--white);
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  
+  /***  FIN  Chraracter Info  ***/
