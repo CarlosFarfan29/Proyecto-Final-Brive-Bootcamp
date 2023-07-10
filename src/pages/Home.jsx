@@ -89,7 +89,7 @@ export function Home() {
         <h2 className="Hero-subtitle">See all the characters.</h2>
         <h2 className="Hero-subtitle">And more.</h2>
       </div>
-      <main>
+      <main className="main">
         <h2 className="main-title">Characters List</h2>
         <hr className="custom-hr"></hr>
         <div className="card-container-rym">
