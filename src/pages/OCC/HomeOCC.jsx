@@ -7,11 +7,8 @@ export function HomeOCC() {
 
   return (
     <div className="AppOCC">
-      <div className="HeroOCC">
-        heroOCC
-      </div>
-      <main>
-        <h2>Empresas</h2>
+      <main className="p-[5%]">
+        <h2 className="title-text flex items-center justify-center">Empresas</h2>
         <div className="">
           {
             <Empresas/>
