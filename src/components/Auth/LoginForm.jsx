@@ -1,6 +1,3 @@
-import { Row, Col, Button, InputGroup } from "reactstrap";
-import { AvForm, AvField } from "availity-reactstrap-validation";
-import { FaEnvelope, FaLock, FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 export function LoginForm() {
@@ -27,6 +24,7 @@ export function LoginForm() {
 
   return (
     <div className="form-container">
+      {/*
       <AvForm onValidSubmit={handleSubmit} className="form-login">
         <Row>
           <Col xs="12" md={{ size: 12, offset: 0 }} sm="12">
@@ -71,28 +69,7 @@ export function LoginForm() {
                 }}
               />
             </InputGroup>
-            {/*
-              <InputGroup className="custom-input my-4">
-                <AvField
-                  placeholder="Busca una empresa..."
-                  className="custom-input"
-                  type="text"
-                  name="busqueda"
-                  id="busqueda"
-                  label={<FaSearch className="custom-login-icon" />}
-                  value={formData.busqueda}
-                  onChange={handleInputChange}
-                  validate={{
-                    required: { value: true, errorMessage: "campo requerido" },
-                    pattern: {
-                      value: /^[a-zA-Z0-9]*$/,
-                      errorMessage:
-                        "La búsqueda sólo debe contener letras y números",
-                    },
-                  }}
-              />
-              </InputGroup>
-            */}
+            
 
             <Col
               xs="12"
@@ -103,6 +80,7 @@ export function LoginForm() {
           </Col>
         </Row>
       </AvForm>
+      */}
     </div>
   );
 }
