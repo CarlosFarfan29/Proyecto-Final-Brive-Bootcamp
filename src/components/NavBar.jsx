@@ -10,6 +10,9 @@ export function NavBar(){
         className='Logo'/>
         <button onClick={() => navigate("/conditions")} className='Terms'>
             Terms + Conditions</button>
+            <button onClick={() => navigate("/occ")} className="Terms">
+        OCC Mundial
+      </button>
 
     </header>    
       )

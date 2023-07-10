@@ -59,7 +59,7 @@
   /* Fin HERO */
   
   /* MAIN */
-  main {
+  .main {
     background-color: var(--black);
     padding: 0 5% 5% 5%;
   }
