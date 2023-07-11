@@ -41,36 +41,34 @@ export function OrdenamientoRegistros() {
 
   const handleSearch = () => {
     let registrosOrdenados = [...registros]; // Esto hace una copia de los registros originales
-
     registrosOrdenados.sort((a, b) => {
+      let comparacion = 0;
+  
       if (totalVacantes !== "") {
         const ordenTotalVacantes = totalVacantes === "asc" ? 1 : -1;
         if (a.totalVacantes !== b.totalVacantes) {
-          return (a.totalVacantes - b.totalVacantes) * ordenTotalVacantes;
+          comparacion = (a.totalVacantes - b.totalVacantes) * ordenTotalVacantes;
         }
       }
-
+  
       if (nombreEmpresa !== "") {
         const ordenNombreEmpresa = nombreEmpresa === "asc" ? 1 : -1;
-        console.log('entra a ordenar por nombre empresa')
-
         if (a.nombreEmpresa !== b.nombreEmpresa) {
-          return (
-            a.nombreEmpresa.localeCompare(b.nombreEmpresa) * ordenNombreEmpresa
-          );
+          comparacion =
+            a.nombreEmpresa.localeCompare(b.nombreEmpresa) * ordenNombreEmpresa;
         }
       }
-
+  
       if (fecha !== "") {
         const ordenFecha = fecha === "asc" ? 1 : -1;
         if (a.fecha !== b.fecha) {
-          return (new Date(a.fecha) - new Date(b.fecha)) * ordenFecha;
+          comparacion = (new Date(a.fecha) - new Date(b.fecha)) * ordenFecha;
         }
       }
-
-      return 0; // Si no cambian los campos de ordenamiento, no se realiza ningún cambio
+  
+      return comparacion;
     });
-
+  
     setRegistros(registrosOrdenados);
   };
 
