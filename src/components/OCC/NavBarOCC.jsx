@@ -33,14 +33,13 @@ export function NavBarOCC() {
 
   return (
     <header className="bg-dark-color">
-      <div className="container mx-auto flex items-center justify-between py-4 pl-8 pr-8">
+
+      <div className="mx-auto flex items-center justify-between py-3 pl-10 pr-10">
         <ul className="flex space-x-4 ml-auto">
-          {" "}
-          {/* Utiliza ml-auto para mover el contenido hacia la derecha */}
           <li>
             <a href="https://www.occ.com.mx/">
               <img
-                src="/img/occmundial.png"
+                src="/img/occmundial.svg"
                 alt="OCCMundial"
                 className="logo-header"
               />
@@ -48,12 +47,13 @@ export function NavBarOCC() {
           </li>
           <li>
             <a href="https://brivesoluciones.com/">
-              <img src="/img/brive.png" alt="Brivé" className="logo-header" />
+              <img src="/img/brive.svg" alt="Brivé" className="logo-header" />
             </a>
           </li>
         </ul>
       </div>
-      <nav className="flex items-center justify-between bg-primary-color p-10 pl-10 pr-10">
+
+      <nav className="flex items-center justify-between bg-primary-color py-8 pl-10 pr-10">
         <form className="flex">
           <div className="relative flex items-center">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
