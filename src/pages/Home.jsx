@@ -1,10 +1,9 @@
 import "../App.css";
 import { Characters } from "../components/Characters";
 import { useEffect, useState } from "react";
-import { useNavigate /*useLocation, useParams */ } from "react-router-dom";
+import {/*useLocation, useParams */ } from "react-router-dom";
 
 export function Home() {
-  const navigate = useNavigate();
 
   /*
   const params = useParams();
@@ -18,15 +17,12 @@ export function Home() {
     console.log("Ir a la pagina: ", pagina);
     if (pagina && pagina.length > 0) {
       // Parámetro no.página - paginación
-      const paginaAmostrar = pagina.slice(
-        pagina.lastIndexOf("=") + 1
-      );
+      const paginaAmostrar = pagina.slice(pagina.lastIndexOf("=") + 1);
 
       console.log("paginaAmostrar: ", paginaAmostrar);
 
-
       consoleCharacters(paginaAmostrar);
-      
+
       //navigate(`/home/${paginaAmostrar}`);
     }
   };
