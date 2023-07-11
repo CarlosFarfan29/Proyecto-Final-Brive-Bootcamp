@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 export function NavBarOCC() {
+  const specialCharactersRegex = /^[a-zA-Z0-9\s]+$/; // Solo permite letras, números y espacios
+
   const navigate = useNavigate();
   const [isInputTouched, setIsInputTouched] = useState(false);
 
@@ -20,7 +22,6 @@ export function NavBarOCC() {
   const handleInputBlur = () => {
     setIsInputTouched(true);
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,11 +73,16 @@ export function NavBarOCC() {
               onBlur={handleInputBlur}
               required
             />
-             {formData.busqueda === "" && isInputTouched && (
-            <span className="absolute top-full left-0 text-red-500 text-xs mt-1">
-              El campo de búsqueda es requerido.
-            </span>
-          )}
+
+            {isInputTouched && (
+              <span className="absolute top-full left-0 text-error text-xs mt-1">
+                {formData.busqueda === ""
+                  ? "El campo de búsqueda es requerido."
+                  : !specialCharactersRegex.test(formData.busqueda)
+                  ? "El campo de búsqueda no debe tener caracteres especiales."
+                  : ""}
+              </span>
+            )}
           </div>
           <button
             type="submit"
