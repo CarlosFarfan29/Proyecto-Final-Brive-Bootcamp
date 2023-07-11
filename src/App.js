@@ -1,15 +1,17 @@
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { HomeOCC } from "./pages/OCC/HomeOCC";
+import Login from './pages/Login';
+import {Home}  from "./pages/Home";
+// import { HomeOCC } from "./pages/OCC/HomeOCC";
 import React from 'react';
 
-import { Conditions } from "./pages/Condition";
-import { NavBar } from "./components/NavBar";
-import { Footer } from "./components/Footer";
-import { CharacterInfo } from "./pages/CharacterInfo";
-import { Login } from "./pages/Login";
-import { NavBarOCC } from "./components/OCC/NavBarOCC";
+// import { Conditions } from "./pages/Condition";
+// import { NavBar } from "./components/NavBar";
+// import { Footer } from "./components/Footer";
+// import { CharacterInfo } from "./pages/CharacterInfo";
+// import { NavBarOCC } from "./components/OCC/NavBarOCC";
+
+import AuthLayout from './layouts/AuthLayout';
 
 
 function App() {
@@ -17,6 +19,17 @@ function App() {
   return (
     <>      
       <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<AuthLayout/>}>
+            <Route index element={<Login/>}/>
+          </Route>
+
+          <Route path="/home" element={<Home/>}>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+      {/* <BrowserRouter>
         <header>
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
@@ -57,7 +70,7 @@ function App() {
               } />
             <Route path="*" element={<Home />} />
           </Routes>
-        </header>
+        </header> */}
         {/* 
         <main className="main">
           <Routes>
@@ -69,8 +82,8 @@ function App() {
             <Route path="*" element={<Home />} />
           </Routes>
         </main>
-        */}
-      </BrowserRouter>
+        
+      </BrowserRouter>*/}
     </>
   );
 }
