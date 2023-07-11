@@ -1,54 +1,164 @@
-import React from "react";
-import { Row, Col, Button, Container } from "reactstrap";
-import { LoginForm } from "../components/Auth/LoginForm";
+import { useState } from "react";
+import Alerta from "../components/Alerta";
+// import { useNavigate } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible, AiFillLock, AiFillMail} from "react-icons/ai";
+// import Cookies from 'universal-cookie'
+// import axios from 'axios'
 
-export function Login() {
+const Login = () => {
+  // // const = baseUrl = "api"
+  // const cookies = new Cookies();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alerta, setAlerta] = useState({});
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  // const [form, setForm] = useState({
+  //   email:'',
+  //   password:''
+  // })
+  // const handleChange = e => {
+  //   const {name, value} = e.target;
+  //   setForm({
+  //     ...form,
+  //     [name]: value
+  //   })
+
+  //   console.log(form)
+  // }
+
+  // const iniciarSesion = async () =>{
+  //   await axios.get(baseUrl+`/${form.email}/${form.password}`)
+  //   .then(response => {
+  //     return response.data;
+  //   }).then(response=>{
+  //     if(response.lenght>0){
+  //       var respuesta =response[0];
+  //       console.log(respuesta)
+  //     }
+  //   })
+  // }
+
+  function togglePasswordVisibility() {
+    setIsPasswordVisible((prevState) => !prevState);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if ([email, password].includes("")) {
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+      return;
+    }
+
+    //   //Conectar con la API
+    //   // try{
+    //   //   const {data} = await
+    //   // }catch(error){
+
+    //   // }
+  };
+
+  const { msg } = alerta;
+
   return (
     <>
-      <div className="container-page">
+      <div className="bg-white shadow rounded-3xl md:py-14 md:px-16 p-5 max-md:w-screen bg-opacity-25">
+        <h1 className="text-indigo-700 font-black text-4xl mb-14">Login</h1>
 
-        <div className="background-shapes">
-          <div className="rectangle1 bottom-left"></div>
-          <div className="rectangle2 bottom-left"></div>
-          <div className="rectangle3 bottom-left"></div>
+        {msg && <Alerta alerta={alerta} />}
 
+        <form onSubmit={handleSubmit}>
+          <div className="my-8">
+            <label
+              className="text-gray-600 block text-lg font-bold"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <div className="relative">
+              <input
+                className="w-full mt-3 pl-9 p-3 border rounded-lg bg-gray-50"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="username@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                // onChange={handleChange}
+              />
 
-          <div className="rectangle1 top-right"></div>
-          <div className="rectangle2 top-right"></div>
-          <div className="rectangle3 top-right"></div>
-
-        </div>
-
-        <div className="card-container-login card-container">
-          <Container>
-            <Row className="">
-              <div className="screen__background">
-                <span className="screen__background__shape screen__background__shape4"></span>
-                <span className="screen__background__shape screen__background__shape3"></span>
-                <span className="screen__background__shape screen__background__shape2"></span>
-                <span className="screen__background__shape screen__background__shape1"></span>
+              <div className="absolute inset-y-0 left-0 flex mt-3 items-center px-2 text-gray-600 text-xl">
+                <AiFillMail/>
               </div>
-              <Col
-                xs="12"
-                sm={{ size: 12, offset: 0 }}
-                md={{ size: 12, offset: 0 }}
-                lg={{ size: 12, offset: 0 }}
-              >
-                {/*
-                    <Row className="logo-aux">
-                <Col xs="12" className="flex justify-center items-center mt-8">
-                  <img src="" alt="" />
-                </Col>
-              </Row>
-                    
-                    */}
+            </div>
+          </div>
 
-                {<LoginForm />}
-              </Col>
-            </Row>
-          </Container>
-        </div>
+          <div className="my-8">
+            <label
+              className="text-gray-600 block text-lg font-bold"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <div className="relative">
+              <input
+                className="w-full mt-3 pl-9 p-3 border rounded-lg bg-gray-50"
+                type={isPasswordVisible ? "text" : "password"}
+                id="password"
+                placeholder="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                // onChange={handleChange}
+              />
+
+              <div className="absolute inset-y-0 left-0 flex mt-3 items-center px-2 text-gray-600 text-xl">
+                <AiFillLock/>
+              </div>
+
+              <div className="absolute inset-y-0 right-0 flex mt-3 items-center px-4 text-gray-600 text-xl">
+                {isPasswordVisible ? (
+                  <AiOutlineEye
+                    onClick={togglePasswordVisibility}
+                    className="cursor-pointer"
+                  />
+                ) : (
+                  <AiOutlineEyeInvisible
+                    onClick={togglePasswordVisibility}
+                    className="cursor-pointer"
+                  />
+                )}
+              </div>
+
+              <div className="absolute inset-y-0 right-0 flex mt-3 items-center px-4 text-gray-600 text-xl">
+                {isPasswordVisible ? (
+                  <AiOutlineEye
+                    onClick={togglePasswordVisibility}
+                    className="cursor-pointer"
+                  />
+                ) : (
+                  <AiOutlineEyeInvisible
+                    onClick={togglePasswordVisibility}
+                    className="cursor-pointer"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+
+          <input
+            className="bg-orange-500 w-full mb-5 mt-10 py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-orange-600 transition-colors"
+            type="submit"
+            value="Sign In"
+          />
+        </form>
       </div>
     </>
   );
-}
+};
+
+export default Login;
