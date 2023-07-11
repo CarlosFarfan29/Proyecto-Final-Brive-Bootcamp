@@ -1,26 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-export function Empresas() {
-  const navigate = useNavigate();
+export function Empresas({registro}) {
 
-  /*
-  if (!empresa) {
+  if (!registro) {
     return null;
-  }*/
+  }
 
-  return (
-    <div>
-      <div className="bg-white rounded-lg shadow-md p-4 w-64 h-auto border border-gray-300">
+  return(
+    <div className="bg-white rounded-lg shadow-md p-4 w-64 h-auto border border-gray-300">
         <div className="mt-4">
-          <h3 className="text-lg font-semibold">Nombre de la empresa</h3>
+          <h3 className="text-lg font-semibold">{registro.nombreEmpresa}</h3>
           <p>
-            <strong>Total de empleos:</strong>100
+            <strong>Total de empleos:</strong>{registro.totalVacantes}
           </p>
           <p>
-            <strong>fecha de búsqueda:</strong>100
+            <strong>fecha de búsqueda:</strong>{registro.fecha}
           </p>
         </div>
       </div>
-    </div>
   );
 }
