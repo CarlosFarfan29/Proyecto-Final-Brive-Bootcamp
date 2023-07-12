@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HistorialTabla } from "./HistorialTabla";
+import {AiFillCloseSquare} from "react-icons/ai";
 
 const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
   const [totalVacantes, setTotalVacantes] = useState(""); // para asc o desc del select "Total vacantes"
@@ -114,7 +115,7 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
         </span>
 
         <div
-          className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full"
+          className=" relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full"
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-headline"
@@ -122,7 +123,7 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
           <div>
             <div className="mt-3 text-center sm:mt-5">
               
-              <h3 className="text-orange-500 font-black text-2xl mb-14">
+              <h3 className="text-orange-500 font-black text-2xl mb-14 uppercase">
                 Historial mis Búsquedas
               </h3>
               <div className="flex items-center mb-4">
@@ -131,7 +132,7 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
                 </label>
                 <select
                   id="selectTotalVacantes"
-                  className="p-2 bg-secondary-color hover:bg-primary-color rounded-md mr-3"
+                  className="p-2 bg-secondary-color hover:bg-primary-color rounded-md mr-3 text-white"
                   value={totalVacantes}
                   onChange={handleTotalVacantes}
                 >
@@ -145,7 +146,7 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
                 </label>
                 <select
                   id="selectNombreEmpresa"
-                  className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md"
+                  className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md text-white"
                   value={nombreEmpresa}
                   onChange={handleNombreEmpresa}
                 >
@@ -159,7 +160,7 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
                 </label>
                 <select
                   id="selectFechaBusqueda"
-                  className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md"
+                  className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md text-white"
                   value={fecha}
                   onChange={handleFecha}
                 >
@@ -169,16 +170,16 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
                 </select>
               </div>
               <div className="mt-2">
-                <table className="min-w-full border-collapse border border-slate-500">
-                  <thead>
-                    <tr className="bg-slate-500 text-white uppercase font-black max-sm:text-xs">
-                      <th>No</th>
+                <table className="min-w-full border-collapse border border-slate-500 my-10">
+                  <thead className="border-collapse border border-slate-500">
+                    <tr className="bg-teal-700 text-white uppercase font-black max-sm:text-xs">
+                      <th className="p-2">N°</th>
                       <th>Nombre de la empresa</th>
                       <th>Total de empleos</th>
                       <th>Fecha de Busqueda</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="border-collapse border border-slate-500">
                     {/*data.map((item) => (
                       <tr key={item.id}>
                         <td>{item.column1}</td>
@@ -217,10 +218,11 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
                       : currentPage + 1}
                   </button>
                 </div>
-                <button className="bg-terciary-color hover:bg-orange-color text-white px-4 py-2 rounded-md ml-4"
+
+                <button className="absolute top-0 right-0 flex mt-3 items-center px-4 font-black text-red-600 text-5xl"
 
               onClick={() => setShowModalHistorial(false)}>
-                Cerrar modal
+                <AiFillCloseSquare/>
               </button>
               </div>
             </div>

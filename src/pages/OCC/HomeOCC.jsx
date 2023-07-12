@@ -5,7 +5,7 @@ export function HomeOCC() {
   return (
     <div className="AppOCC">
       <main className="p-[5%]">
-        <h2 className="title-text flex items-center justify-center">
+        <h2 className="title-text flex items-center justify-center mb-6 font-black uppercase">
           Empresas
         </h2>
         <div className="w-full">
