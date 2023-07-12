@@ -1,0 +1,33 @@
+/* PAGINACION */
+.pagination-occ {
+  display: flex;
+  justify-content: center;
+  /* Alineación horizontal */
+  align-items: center;
+  /* Alineación vertical */
+
+  padding: 10px 0 40px 0;
+  /* superior, derecho, inferior, izquierdo */
+  color: var(--black);
+  background-color: transparent;
+}
+
+.pagination-occ p {
+  margin: 0 10px 0 10px;
+}
+
+.prev-button-occ,
+.next-button-occ {
+  padding: 10px 20px;
+  background-color: var(--terciary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.prev-button-occ:hover,
+.next-button-occ:hover {
+  background-color: var(--orange);
+}
+
+/* Fin PAGINACION */
