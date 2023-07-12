@@ -9,22 +9,26 @@ export function OrdenamientoRegistros() {
     { id: 1, totalVacantes: 10, nombreEmpresa: "Famsa", fecha: "2022-07-22" },
     { id: 2, totalVacantes: 50, nombreEmpresa: "Walmart", fecha: "2022-02-01" },
     { id: 3, totalVacantes: 29, nombreEmpresa: "Brive", fecha: "2022-03-05" },
-    {
-      id: 4,
-      totalVacantes: 81,
-      nombreEmpresa: "OCCMundial",
-      fecha: "2022-03-01",
-    },
+    { id: 4, totalVacantes: 81, nombreEmpresa: "OCCMundial", fecha: "2022-03-01"},
     { id: 5, totalVacantes: 2, nombreEmpresa: "RopaShop", fecha: "2022-05-01" },
     { id: 6, totalVacantes: 22, nombreEmpresa: "Empresa", fecha: "2022-06-01" },
-    {
-      id: 7,
-      totalVacantes: 66,
-      nombreEmpresa: "Facebook",
-      fecha: "2022-06-01",
-    },
+    { id: 7, totalVacantes: 66, nombreEmpresa: "Facebook", fecha: "2022-06-01"},
     { id: 8, totalVacantes: 89, nombreEmpresa: "Youtube", fecha: "2022-07-01" },
   ]);
+  
+  /* Inicio Logica Paginación */
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(4);
+  const totalPages = Math.ceil(registros.length / itemsPerPage);
+
+  const lastItem = currentPage * itemsPerPage;
+  const firstItem = lastItem - itemsPerPage;
+  const currentItems = registros.slice(firstItem, lastItem);
+
+  const handlePagina = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  /* ------------------------ */
 
   const handleTotalVacantes = (event) => {
     console.log("filtroTotalVacantes");
@@ -72,10 +76,12 @@ export function OrdenamientoRegistros() {
     setRegistros(registrosOrdenados);
   };
 
+
   // Llamar a handleSearch para ordenar los registros
   useEffect(() => {
     handleSearch();
   }, [totalVacantes, nombreEmpresa, fecha]); // dependencias necesarias para activar el ordenamiento
+
 
   return (
     <div className="flex flex-col">
@@ -128,9 +134,30 @@ export function OrdenamientoRegistros() {
       </div>
 
       <div className="grid grid-cols-4 gap-4">
-        {registros.map((registro) => (
+        {currentItems.map((registro) => (
           <Empresas key={registro.id} registro={registro} />
         ))}
+      </div>
+
+      <div className="pagination-occ">
+        <button
+          className="prev-button-occ"
+          onClick={() => handlePagina(currentPage-1)}
+          disabled={!(currentPage-1)}
+        >
+          {((currentPage-1) === 0) ? 'No hay página previa' : (currentPage-1)}
+        </button>
+        <p>
+          {currentPage}
+          de {totalPages}
+        </p>
+        <button
+          className="next-button-occ"
+          onClick={() => handlePagina(currentPage+1)}
+          disabled={(currentPage+1)>totalPages}
+        >
+          {((currentPage+1)>totalPages) ? 'No hay más páginas por mostrar' : (currentPage+1)}
+        </button>
       </div>
     </div>
   );
