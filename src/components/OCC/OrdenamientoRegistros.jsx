@@ -86,48 +86,54 @@ export function OrdenamientoRegistros() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center mb-4">
-        <label htmlFor="selectTotalVacantes" className="mr-2">
-          Total de vacantes
-        </label>
-        <select
-          id="selectTotalVacantes"
-          className="p-2 bg-secondary-color hover:bg-primary-color rounded-md mr-3"
-          value={totalVacantes}
-          onChange={handleTotalVacantes}
-        >
-          <option value="">...</option>
-          <option value="asc">asc</option>
-          <option value="desc">desc</option>
-        </select>
+      <div className="flex items-center mb-5 flex-wrap gap-5 justify-evenly">
+        <div>
+          <label htmlFor="selectTotalVacantes" className="mr-2">
+            Total de vacantes
+          </label>
+          <select
+            id="selectTotalVacantes"
+            className="p-2 bg-secondary-color hover:bg-primary-color rounded-md mr-3 text-white"
+            value={totalVacantes}
+            onChange={handleTotalVacantes}
+          >
+            <option value="">...</option>
+            <option value="asc">asc</option>
+            <option value="desc">desc</option>
+          </select>
+        </div>
 
-        <label htmlFor="selectNombreEmpresa" className="mr-2">
-          Nombre de la empresa
-        </label>
-        <select
-          id="selectNombreEmpresa"
-          className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md"
-          value={nombreEmpresa}
-          onChange={handleNombreEmpresa}
-        >
-          <option value="">...</option>
-          <option value="asc">asc</option>
-          <option value="desc">desc</option>
-        </select>
+        <div>
+          <label htmlFor="selectNombreEmpresa" className="mr-2">
+            Nombre de la empresa
+          </label>
+          <select
+            id="selectNombreEmpresa"
+            className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md text-white"
+            value={nombreEmpresa}
+            onChange={handleNombreEmpresa}
+          >
+            <option value="">...</option>
+            <option value="asc">asc</option>
+            <option value="desc">desc</option>
+          </select>
+        </div>
 
-        <label htmlFor="selectFechaBusqueda" className="mr-2">
-          Fecha de búsqueda
-        </label>
-        <select
-          id="selectFechaBusqueda"
-          className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md"
-          value={fecha}
-          onChange={handleFecha}
-        >
-          <option value="">...</option>
-          <option value="asc">asc</option>
-          <option value="desc">desc</option>
-        </select>
+        <div>
+          <label htmlFor="selectFechaBusqueda" className="mr-2">
+            Fecha de búsqueda
+          </label>
+          <select
+            id="selectFechaBusqueda"
+            className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md text-white"
+            value={fecha}
+            onChange={handleFecha}
+          >
+            <option value="">...</option>
+            <option value="asc">asc</option>
+            <option value="desc">desc</option>
+          </select>
+        </div>
 
 
       {/*
@@ -140,13 +146,13 @@ export function OrdenamientoRegistros() {
       */}
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="flex flex-wrap gap-4 items-center justify-center m-auto">
         {currentItems.map((registro) => (
           <Empresas key={registro.id} registro={registro} />
         ))}
       </div>
 
-      <div className="pagination-occ">
+      <div className="pagination-occ mt-14">
         <button
           className="prev-button-occ"
           onClick={() => handlePagina(currentPage-1)}
