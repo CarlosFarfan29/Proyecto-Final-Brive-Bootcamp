@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from './pages/Login';
 import {Home}  from "./pages/Home";
 import { HomeOCC } from "./pages/OCC/HomeOCC";
@@ -62,18 +62,6 @@ function App() {
             <Route path="*" element={<Home />} />
           </Routes>
         </header>
-        {/* 
-        <main className="main">
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/conditions" element={<Conditions />} />
-            <Route path="/character/:id" element={<CharacterInfo />} />
-            <Route path="/occ" element={<HomeOCC />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </main>
-        */}
       </BrowserRouter>
     </>
   );
