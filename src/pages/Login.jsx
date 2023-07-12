@@ -11,21 +11,39 @@ const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Realiza la llamada a la API para verificar el inicio de sesión
-    // Aquí debes implementar la lógica de verificación de usuario y contraseña
-
-    if (email === 'usuario@example.com' && password === 'contraseña') {
-      // Inicio de sesión exitoso
-      navigate('/home');
-    } else {
-      // Error de inicio de sesión
+  
+    try {
+      const response = await fetch("https://localhost:7219/api/User/validar-credenciales", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+  
+      if (response.ok) {
+        // Inicio de sesión exitoso
+        navigate('/home');
+      } else {
+        // Error de inicio de sesión
+        const data = await response.json();
+        setAlerta({
+          msg: data.errorMsg || "Error de inicio de sesión",
+          error: true,
+        });
+      }
+    } catch (error) {
+      // Error de red u otro error
       setAlerta({
-        msg: "Usuario o contraseña incorrecta",
+        msg: "Ocurrió un error al realizar la solicitud",
         error: true,
       });
+      console.error(error);
     }
   };
   
