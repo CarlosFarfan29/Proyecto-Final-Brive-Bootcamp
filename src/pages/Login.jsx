@@ -1,10 +1,7 @@
 import { useState } from "react";
 import Alerta from "../components/Alerta";
-// import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible, AiFillLock, AiFillMail} from "react-icons/ai";
 import { useNavigate } from "react-router";
-// import Cookies from 'universal-cookie'
-// import axios from 'axios'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,25 +32,6 @@ const Login = () => {
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   if ([email, password].includes("")) {
-  //     setAlerta({
-  //       msg: "Todos los campos son obligatorios",
-  //       error: true,
-  //     });
-  //     return;
-  //   }
-
-  //   //   //Conectar con la API
-  //   //   // try{
-  //   //   //   const {data} = await
-  //   //   // }catch(error){
-
-  //   //   // }
-  // };
 
   const { msg } = alerta;
 
