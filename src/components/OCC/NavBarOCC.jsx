@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 export function NavBarOCC() {
   const specialCharactersRegex = /^[a-zA-Z0-9\s]+$/; // Solo permite letras, números y espacios
@@ -33,7 +34,6 @@ export function NavBarOCC() {
 
   return (
     <header className="bg-dark-color">
-
       <div className="mx-auto flex items-center justify-between py-3 pl-10 pr-10">
         <ul className="flex space-x-4 ml-auto">
           <li>
@@ -93,9 +93,9 @@ export function NavBarOCC() {
         </form>
 
         <div>
-          <button className="text-white px-4 py-2 rounded-md hover:bg-gray-700">
+          <Link to="/modal" className="text-blue-500 hover:underline">
             Ver historial
-          </button>
+          </Link>
         </div>
       </nav>
     </header>
