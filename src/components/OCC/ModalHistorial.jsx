@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const ModalHistorial = () => {
+const ModalHistorial = ({showModalHistorial, setShowModalHistorial}) => {
   const [data, setData] = useState([]);
 
   // useEffect(() => {
@@ -17,7 +17,7 @@ const ModalHistorial = () => {
   // };
 
   return (
-    <div className="fixed inset-0 overflow-y-auto">
+    <div style={{display: showModalHistorial ? "block" :"none"}}  className="fixed inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -35,6 +35,9 @@ const ModalHistorial = () => {
         >
           <div>
             <div className="mt-3 text-center sm:mt-5">
+            <button onClick={() => setShowModalHistorial(false)}  >
+              Cerrar modal
+            </button>
               <h3 className="text-orange-500 font-black text-2xl mb-14">Historial mis Búsquedas</h3>
               <div className="mt-2">
                 <table className="min-w-full border-collapse border border-slate-500">
