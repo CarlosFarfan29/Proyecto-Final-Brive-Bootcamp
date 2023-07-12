@@ -2,12 +2,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import ModalHistorial from "./ModalHistorial";
 
 export function NavBarOCC() {
   const specialCharactersRegex = /^[a-zA-Z0-9\s]+$/; // Solo permite letras, números y espacios
 
   const navigate = useNavigate();
   const [isInputTouched, setIsInputTouched] = useState(false);
+
+  const [showModalHistorial, setShowModalHistorial] = useState(false);
+
 
   const [formData, setFormData] = useState({
     busqueda: "",
@@ -92,12 +96,19 @@ export function NavBarOCC() {
           </button>
         </form>
 
-        <div>
+        <div>{/*
           <Link to="/modal" className="text-blue-500 hover:underline">
             Ver historial
           </Link>
+            */}
+          <button onClick={() => setShowModalHistorial(true)}  >
+            Historial
+          </button>
         </div>
       </nav>
+
+      <ModalHistorial showModalHistorial={showModalHistorial} setShowModalHistorial={setShowModalHistorial} >
+      </ModalHistorial>
     </header>
   );
 }
