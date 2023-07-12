@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Empresas } from "./Empresas";
 
 export function OrdenamientoRegistros() {
-  const [totalVacantes, setTotalVacantes] = useState("");
-  const [nombreEmpresa, setNombreEmpresa] = useState("");
-  const [fecha, setFecha] = useState("");
+  const [totalVacantes, setTotalVacantes] = useState(""); // para asc o desc del select "Total vacantes"
+  const [nombreEmpresa, setNombreEmpresa] = useState(""); // para asc o desc del select "Orden alfabetico"
+  const [fecha, setFecha] = useState(""); // para asc o desc del select "Fecha de creación"
   const [registros, setRegistros] = useState([
     { id: 1, totalVacantes: 10, nombreEmpresa: "Famsa", fecha: "2022-07-22" },
     { id: 2, totalVacantes: 50, nombreEmpresa: "Walmart", fecha: "2022-02-01" },
@@ -44,6 +44,7 @@ export function OrdenamientoRegistros() {
   };
 
   const handleSearch = () => {
+    console.log("handleSearch()");
     let registrosOrdenados = [...registros]; // Esto hace una copia de los registros originales
     registrosOrdenados.sort((a, b) => {
       let comparacion = 0;
@@ -95,6 +96,7 @@ export function OrdenamientoRegistros() {
           value={totalVacantes}
           onChange={handleTotalVacantes}
         >
+          <option value="">...</option>
           <option value="asc">asc</option>
           <option value="desc">desc</option>
         </select>
@@ -108,6 +110,7 @@ export function OrdenamientoRegistros() {
           value={nombreEmpresa}
           onChange={handleNombreEmpresa}
         >
+          <option value="">...</option>
           <option value="asc">asc</option>
           <option value="desc">desc</option>
         </select>
@@ -121,16 +124,20 @@ export function OrdenamientoRegistros() {
           value={fecha}
           onChange={handleFecha}
         >
+          <option value="">...</option>
           <option value="asc">asc</option>
           <option value="desc">desc</option>
         </select>
 
+
+      {/*
         <button
           onClick={handleSearch}
           className="bg-terciary-color hover:bg-orange-color text-white px-4 py-2 rounded-md ml-4"
         >
           Ordenar
         </button>
+      */}
       </div>
 
       <div className="grid grid-cols-4 gap-4">
