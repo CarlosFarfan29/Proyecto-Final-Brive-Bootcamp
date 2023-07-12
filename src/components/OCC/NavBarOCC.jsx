@@ -89,7 +89,7 @@ export function NavBarOCC() {
             )}
           </div>
           <button
-            type="submit"
+            type="submit" id="buscar"
             className="bg-terciary-color hover:bg-orange-color text-white px-4 py-2 rounded-md ml-2"
           >
             Buscar
@@ -106,7 +106,7 @@ export function NavBarOCC() {
           <div className="text-3xl">
             <AiOutlineHistory />
           </div>
-          <button className="text-2xl" onClick={() => setShowModalHistorial(true)}>
+          <button className="text-2xl" id="verHistorial" onClick={() => setShowModalHistorial(true)}>
             Ver Historial
           </button>
         </div>
