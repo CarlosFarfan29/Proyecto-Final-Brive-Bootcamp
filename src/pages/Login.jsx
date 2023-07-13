@@ -10,6 +10,7 @@ const Login = () => {
   const [alerta, setAlerta] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+  const [logueado, setLogueado] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
