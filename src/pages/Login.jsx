@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Alerta from "../components/Alerta";
 import { AiOutlineEye, AiOutlineEyeInvisible, AiFillLock, AiFillMail } from "react-icons/ai";
 import { useNavigate } from "react-router";
@@ -9,8 +9,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [alerta, setAlerta] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  const [logueado, setLogueado] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,11 +45,7 @@ const Login = () => {
 
       if (response.ok) {
         // Inicio de sesión exitoso
-        setLogueado(true);
-        localStorage.setItem('logueado', true);
-        localStorage.setItem('user', email);
         navigate('/home');
-
       } else {
         const data = await response.json();
         if (response.status === 401) {
@@ -83,6 +77,19 @@ const Login = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    const { msg } = alerta;
+    if (msg) {
+      const timer = setTimeout(() => {
+        setAlerta({});
+      }, 2000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [alerta]);
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
@@ -154,8 +161,7 @@ const Login = () => {
           </div>
 
           <input
-            className="bg-orange-500 w-full mb-5 mt-10 py-3 text-white uppercase font-bold rounded 
-            hover:cursor-pointer hover:bg-orange-600 transition-colors" id="login"
+            className="bg-orange-500 w-full mb-5 mt-10 py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-orange-600 transition-colors"
             type="submit"
             value="Sign In"
           />
