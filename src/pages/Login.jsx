@@ -52,11 +52,15 @@ const Login = ({setIsLogueado}) => {
       );
 
       if (response.ok) {
+
+        console.log("response: ", response);
+
+        const idUsuarioFromBack = await response.json();
         // Inicio de sesión exitoso
         // console.log("response.ok");
         await localStorage.setItem("logueado", true);
         await localStorage.setItem("user", email);
-        await localStorage.setItem("idUsuario", response.idUsuario);
+        await localStorage.setItem("idUsuario", idUsuarioFromBack);
 
         console.log("logueado: ", localStorage.getItem("logueado"));
         console.log("user: ", localStorage.getItem("user"));
