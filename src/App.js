@@ -48,32 +48,32 @@ function App() {
             />*/}
             <Route
               path="/conditions"
-              element={
+              element={(isLogueado) ?
                 <>
                   <NavBar />
                   <Conditions />
                   <Footer />
                 </>
-              }
+              : <Navigate to="/" />}
             />
             <Route
               path="/character/:id"
-              element={
+              element={(isLogueado) ?
                 <>
                   <NavBar />
                   <CharacterInfo />
                   <Footer />
                 </>
-              }
+              : <Navigate to="/" />}
             />
             <Route
               path="/occ"
-              element={
+              element={(isLogueado) ?
                 <>
                   <NavBarOCC />
                   <HomeOCC />
                 </>
-              }
+              : <Navigate to="/" />}
             />
 
             <Route path="/modal" element={<ModalHistorial />} />
