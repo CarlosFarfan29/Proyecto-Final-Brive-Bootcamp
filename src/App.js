@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import { Home } from "./pages/Home";
 import { HomeOCC } from "./pages/OCC/HomeOCC";
@@ -15,6 +15,8 @@ import AuthLayout from "./layouts/AuthLayout";
 import ModalHistorial from "./components/OCC/ModalHistorial";
 
 function App() {
+  const isLogueado = localStorage.getItem("logueado");
+
   return (
     <>
       <BrowserRouter>
@@ -26,6 +28,16 @@ function App() {
 
             <Route
               path="/home"
+              element={(isLogueado) ? 
+                <>
+                <NavBar />
+                <Home />
+                <Footer />
+              </> : <Navigate to="/" />}
+            />
+           
+           {/*  <Route
+              path="/home"
               element={
                 <>
                   <NavBar />
@@ -33,7 +45,7 @@ function App() {
                   <Footer />
                 </>
               }
-            />
+            />*/}
             <Route
               path="/conditions"
               element={

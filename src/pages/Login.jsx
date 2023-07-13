@@ -10,6 +10,8 @@ const Login = () => {
   const [alerta, setAlerta] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+  const [logueado, setLogueado] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -45,7 +47,11 @@ const Login = () => {
 
       if (response.ok) {
         // Inicio de sesión exitoso
+        setLogueado(true);
+        localStorage.setItem('logueado', true);
+        localStorage.setItem('user', email);
         navigate('/home');
+
       } else {
         const data = await response.json();
         if (response.status === 401) {
@@ -148,7 +154,8 @@ const Login = () => {
           </div>
 
           <input
-            className="bg-orange-500 w-full mb-5 mt-10 py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-orange-600 transition-colors"
+            className="bg-orange-500 w-full mb-5 mt-10 py-3 text-white uppercase font-bold rounded 
+            hover:cursor-pointer hover:bg-orange-600 transition-colors" id="login"
             type="submit"
             value="Sign In"
           />
