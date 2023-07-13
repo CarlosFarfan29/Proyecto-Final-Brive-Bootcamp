@@ -14,7 +14,7 @@ export function HomeOCC({empresa}) {
         </h3>
 
         <h5 className="title-text flex items-center justify-center mb-6 font-black uppercase">
-          Fecha búsqueda: {empresa ? empresa.fechaBusqueda : ''}
+          Fecha búsqueda: {empresa ? empresa.fecha : ''}
         </h5>
         {/*<div className="w-full">
           <OrdenamientoRegistros />

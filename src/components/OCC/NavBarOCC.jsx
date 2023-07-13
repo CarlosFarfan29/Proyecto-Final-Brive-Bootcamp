@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ModalHistorial from "./ModalHistorial";
 import { AiOutlineHistory } from "react-icons/ai";
 
-export function NavBarOCC({setIsLogueado, setEmpresa}) {
+export function NavBarOCC({ setIsLogueado, setEmpresa }) {
   const specialCharactersRegex = /^[a-zA-Z0-9\s]+$/; // Solo permite letras, números y espacios
 
   const navigate = useNavigate();
@@ -21,24 +21,31 @@ export function NavBarOCC({setIsLogueado, setEmpresa}) {
     busqueda: "",
   });
 
-
-
-
-  async function getEmpresaBusqueda(empresa) {
+  async function getEmpresaBusqueda(empresaValue) {
     // pageNumber = Object.keys(paramsData)[0].split("/")[1];
     /* Promesa para el Api */
 
-    let data= new Object();
+    /*
+    let data = new Object();
     data.empresa = empresa;
+    */
 
+    const empresa = empresaValue;
 
     const res = await fetch(
-      `https://localhost:7219/api/History/busqueda-empresa`, {
-        method: 'POST',
+      `https://localhost:7219/api/History/busqueda-empresa/` +
+        localStorage.getItem("idUsuario"),
+      {
+        method: "POST",
+        /*
         headers: {
           'Content-Type':  'application/json;charset=utf-8'
         },
-        body: JSON.stringify(data)
+        */
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(empresa),
       }
     )
       .then((response) => response.json()) //Lo combierte a json con json()
@@ -48,17 +55,26 @@ export function NavBarOCC({setIsLogueado, setEmpresa}) {
         // return { results, info };
         console.log(data);
         // setEmpresa(data);
-        setEmpresa({nombreEmpresa: 'empresaPrueba', totalEmpleos: 15, fechaBusqueda:'2023-07-11 02:29:09.8198319'}); // aqui es prueba, debe ser data
+
+        if (data.nombreEmpresa) {
+          console.log("Encontró resultados");
+          setEmpresa(data); // aqui es prueba, debe ser data
+          // setEmpresa({nombreEmpresa: 'empresaPrueba', totalEmpleos: 15, fechaBusqueda:'2023-07-11 02:29:09.8198319'}); // aqui es prueba, debe ser data
+        } else {
+          setEmpresa(null); // aqui es prueba, debe ser data
+        }
+
+        // setEmpresa({nombreEmpresa: 'empresaPrueba', totalEmpleos: 15, fechaBusqueda:'2023-07-11 02:29:09.8198319'}); // aqui es prueba, debe ser data
       }) // solo devolver 'results'
       //.catch(() => {return []})
       .catch(
-        setEmpresa({nombreEmpresa: 'empresaPrueba', totalEmpleos: 15, fechaBusqueda:'2023-07-11 02:29:09.8198319'}) // En lugar de null
+        setEmpresa(null) // En lugar de null
+        // setEmpresa({nombreEmpresa: 'empresaPrueba', totalEmpleos: 15, fechaBusqueda:'2023-07-11 02:29:09.8198319'}) // En lugar de null
       ); // devolver un arreglo vacío en caso de error
 
     console.log("Res = ", res);
-    return res.results;
+    return res;
   }
-
 
   const handleInputChange = (e) => {
     setFormData({
@@ -113,7 +129,7 @@ export function NavBarOCC({setIsLogueado, setEmpresa}) {
             </a>
           </li>
         </ul>
-        <button onClick={() => handleCerrarSesion()} className="ml-8">
+        <button id="btnCerrarSesionOcc" onClick={() => handleCerrarSesion()} className="ml-8">
           <div className="p-1 bg-yellow-500 hover:bg-yellow-600 transition-colors rounded-lg border-solid border-2 border-white">
             <ArrowRightOnRectangleIcon className="w-8 h-8 text-white" />
           </div>
@@ -154,11 +170,13 @@ export function NavBarOCC({setIsLogueado, setEmpresa}) {
           <button
             type=""
             id="buscar"
-            disabled={formData.busqueda === ""
-            ? "disabled"
-            : !specialCharactersRegex.test(formData.busqueda)
-            ? "disabled"
-            : ""}
+            disabled={
+              formData.busqueda === ""
+                ? "disabled"
+                : !specialCharactersRegex.test(formData.busqueda)
+                ? "disabled"
+                : ""
+            }
             onClick={handleSubmit}
             className="bg-terciary-color hover:bg-orange-color text-white px-4 py-2 rounded-md ml-2"
           >
