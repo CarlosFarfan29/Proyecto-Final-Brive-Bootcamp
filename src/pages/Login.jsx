@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Alerta from "../components/Alerta";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
@@ -12,7 +11,7 @@ const Login = ({setIsLogueado}) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [alerta, setAlerta] = useState({});
+  const [alerta, setAlerta] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -20,19 +19,13 @@ const Login = ({setIsLogueado}) => {
 
     // Validar campos vacíos
     if (email.trim() === "" || password.trim() === "") {
-      setAlerta({
-        msg: "Por favor, completa todos los campos",
-        error: true,
-      });
+      setAlerta("Por favor, completa todos los campos")
       return;
     }
 
     // Validar el formato del correo electrónico
     if (!isValidEmail(email)) {
-      setAlerta({
-        msg: "Por favor, ingresa un correo electrónico válido",
-        error: true,
-      });
+      setAlerta("Por favor, ingresa un correo electrónico válido")
       return;
     }
 
@@ -73,45 +66,33 @@ const Login = ({setIsLogueado}) => {
         // console.log("data: ", data);
         if (response.status === 401) {
           // Credenciales incorrectas
-          setAlerta({
-            msg: "Las credenciales ingresadas son incorrectas",
-            error: true,
-          });
+          setAlerta("Las credenciales ingresadas son incorrectas");
         } else if (response.status === 404) {
           // Cuenta no existe
-          setAlerta({
-            msg: "La cuenta no existe. Por favor, verifica el correo electrónico ingresado",
-            error: true,
-          });
+          setAlerta(
+            "La cuenta no existe. Por favor, verifica el correo electrónico ingresado"
+          );
         } else {
           // Error de inicio de sesión
-          setAlerta({
-            msg: data.errorMsg || "Error de inicio de sesión",
-            error: true,
-          });
+          setAlerta(data.errorMsg || "Error de inicio de sesión");
         }
+        
       }
     } catch (error) {
       // Error de red u otro error
-      setAlerta({
-        msg: "Ocurrió un error al realizar la solicitud",
-        error: true,
-      });
+      setAlerta("Ocurrió un error al realizar la solicitud");
       console.error(error);
     }
   };
 
   useEffect(() => {
-    const { msg } = alerta;
-    if (msg) {
-      const timer = setTimeout(() => {
-        setAlerta({});
-      }, 2000);
+    const timer = setTimeout(() => {
+      setAlerta("");
+    }, 2000);
 
-      return () => {
-        clearTimeout(timer);
-      };
-    }
+    return () => {
+      clearTimeout(timer);
+    };
   }, [alerta]);
 
   function togglePasswordVisibility() {
@@ -124,14 +105,14 @@ const Login = ({setIsLogueado}) => {
     return emailRegex.test(email);
   };
 
-  const { msg } = alerta;
-
   return (
     <>
       <div className="bg-white shadow rounded-3xl md:py-14 md:px-16 p-5 max-md:w-screen bg-opacity-25">
         <h1 className="text-indigo-700 font-black text-4xl mb-14">Login</h1>
 
-        {msg && <Alerta alerta={alerta} />}
+        {alerta && (
+          <p className="from-red-400 to-red-600 bg-gradient-to-br text-center p-3 rounded-xl uppercase text-white font-bold text-sm">{alerta}</p>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="my-8">
