@@ -198,6 +198,7 @@ const Login = ({setIsLogueado}) => {
           <input
             className="bg-orange-500 w-full mb-5 mt-10 py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-orange-600 transition-colors"
             type="submit"
+            id="login"
             value="Sign In"
           />
         </form>

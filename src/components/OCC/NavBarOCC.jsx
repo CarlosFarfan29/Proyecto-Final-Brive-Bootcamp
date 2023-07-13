@@ -119,7 +119,7 @@ export function NavBarOCC({ setIsLogueado, setEmpresa }) {
             </a>
           </li>
         </ul>
-        <button onClick={() => handleCerrarSesion()} className="ml-8">
+        <button id="btnCerrarSesionOcc" onClick={() => handleCerrarSesion()} className="ml-8">
           <div className="p-1 bg-yellow-500 hover:bg-yellow-600 transition-colors rounded-lg border-solid border-2 border-white">
             <ArrowRightOnRectangleIcon className="w-8 h-8 text-white" />
           </div>
