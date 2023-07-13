@@ -18,6 +18,8 @@ function App() {
   // const isLogueado = localStorage.getItem("logueado");
   const [isLogueado, setIsLogueado] = useState(localStorage.getItem("logueado"));
 
+  const [empresa, setEmpresa] = useState(null);
+
   return (
     <>
       <BrowserRouter>
@@ -71,8 +73,8 @@ function App() {
               path="/occ"
               element={(isLogueado) ?
                 <>
-                  <NavBarOCC setIsLogueado={setIsLogueado} />
-                  <HomeOCC />
+                  <NavBarOCC setEmpresa={setEmpresa} setIsLogueado={setIsLogueado} />
+                  <HomeOCC empresa={empresa} />
                 </>
               : <Navigate to="/" />}
             />
