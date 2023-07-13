@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MagnifyingGlassIcon,ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon,ArrowRightOnRectangleIcon, ArrowUturnLeftIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import ModalHistorial from "./ModalHistorial";
 import { AiOutlineHistory } from "react-icons/ai";
@@ -13,7 +13,9 @@ export function NavBarOCC({setIsLogueado, setEmpresa}) {
 
   const [showModalHistorial, setShowModalHistorial] = useState(false);
 
-  
+  const handleClick = () => {
+    navigate(-1); // regresa a la ruta anterior
+  };
 
   const [formData, setFormData] = useState({
     busqueda: "",
@@ -88,7 +90,13 @@ export function NavBarOCC({setIsLogueado, setEmpresa}) {
 
   return (
     <header className="bg-dark-color">
-      <div className="mx-auto flex items-center justify-between py-3 pl-10 pr-10">
+      <div className="mx-auto flex-wrap gap-4 flex items-center justify-evenly py-3 pl-10 pr-10">
+
+        <div className="text-white flex justify-between items-center gap-2">
+          <ArrowUturnLeftIcon className="w-5 h-5"/>
+          <button onClick={handleClick}>Regresar</button>
+        </div>
+
         <ul className="flex space-x-4 ml-auto">
           <li>
             <a href="https://www.occ.com.mx/">
@@ -112,7 +120,7 @@ export function NavBarOCC({setIsLogueado, setEmpresa}) {
         </button>
       </div>
 
-      <nav className="flex items-center justify-between bg-primary-color py-8 pl-10 pr-10">
+      <nav className="flex items-center justify-between max-sm:justify-around flex-wrap gap-8 bg-primary-color py-8 pl-10 pr-10">
         <form className="flex">
           <div className="relative flex items-center">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

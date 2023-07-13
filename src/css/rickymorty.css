@@ -4,12 +4,15 @@
     display: flex;
     width: 100%;
     /* Siempre declarar el ancho de un componente */
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     padding: 10px 0px;
     /* padding vertical */
     background-color: var(--black);
     color: var(--white);
+    flex-wrap: wrap;
+    gap: 1.2rem;
+
   }
   
   .Logo {
@@ -32,6 +35,7 @@
     background-size: cover;
     /* Forzar tamaño de la imagen */
     background-position: center;
+    text-align: center;
   
     /* Centrar contenido div */
     display: flex;
@@ -187,7 +191,7 @@
     /* superior, derecho, inferior, izquierdo */
 
     flex-wrap: wrap;
-  
+    gap: 1.5rem;
     color: var(--white);
     font-size: 20px;
   
@@ -217,7 +221,7 @@
     padding: 10px 50px;
     background-color: var(--black);
     color: var(--white);
-    height: 90vh;
+    height: auto;
   }
   
   /*FIN TERMS Privacy*/
