@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import { Home } from "./pages/Home";
 import { HomeOCC } from "./pages/OCC/HomeOCC";
-import React from "react";
+import { useState, useEffect, React } from "react";
 
 import { Conditions } from "./pages/Condition";
 import { NavBar } from "./components/NavBar";
@@ -15,7 +15,8 @@ import AuthLayout from "./layouts/AuthLayout";
 import ModalHistorial from "./components/OCC/ModalHistorial";
 
 function App() {
-  const isLogueado = localStorage.getItem("logueado");
+  // const isLogueado = localStorage.getItem("logueado");
+  const [isLogueado, setIsLogueado] = useState(localStorage.getItem("logueado"));
 
   return (
     <>
@@ -23,14 +24,14 @@ function App() {
         <header>
           <Routes>
             <Route path="/" element={(!isLogueado) ? <AuthLayout />: <Navigate to="/home" />}>
-              <Route index element={<Login />} />
+              <Route index element={<Login setIsLogueado={setIsLogueado} />} />
             </Route>
 
             <Route
               path="/home"
               element={(isLogueado) ? 
                 <>
-                <NavBar />
+                <NavBar setIsLogueado={setIsLogueado}/>
                 <Home />
                 <Footer />
               </> : <Navigate to="/" />}
@@ -50,7 +51,7 @@ function App() {
               path="/conditions"
               element={(isLogueado) ?
                 <>
-                  <NavBar />
+                  <NavBar setIsLogueado={setIsLogueado} />
                   <Conditions />
                   <Footer />
                 </>
@@ -60,7 +61,7 @@ function App() {
               path="/character/:id"
               element={(isLogueado) ?
                 <>
-                  <NavBar />
+                  <NavBar setIsLogueado={setIsLogueado} />
                   <CharacterInfo />
                   <Footer />
                 </>
@@ -70,7 +71,7 @@ function App() {
               path="/occ"
               element={(isLogueado) ?
                 <>
-                  <NavBarOCC />
+                  <NavBarOCC setIsLogueado={setIsLogueado} />
                   <HomeOCC />
                 </>
               : <Navigate to="/" />}
