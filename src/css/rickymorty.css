@@ -85,7 +85,7 @@
     display: flex;
     flex-wrap: wrap;
     /* evita que se desborden los cards de su contenedor padre */
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding-top: 5%;
   
   }
@@ -185,6 +185,8 @@
   
     padding: 20px 0 20px 0;
     /* superior, derecho, inferior, izquierdo */
+
+    flex-wrap: wrap;
   
     color: var(--white);
     font-size: 20px;
