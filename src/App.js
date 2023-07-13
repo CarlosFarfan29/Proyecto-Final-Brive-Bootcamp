@@ -22,7 +22,7 @@ function App() {
       <BrowserRouter>
         <header>
           <Routes>
-            <Route path="/" element={<AuthLayout />}>
+            <Route path="/" element={(!isLogueado) ? <AuthLayout />: <Navigate to="/home" />}>
               <Route index element={<Login />} />
             </Route>
 
