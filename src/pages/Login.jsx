@@ -10,7 +10,6 @@ const Login = () => {
   const [alerta, setAlerta] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const [logueado, setLogueado] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +28,6 @@ const Login = () => {
   
       if (response.ok) {
         // Inicio de sesión exitoso
-        setLogueado(true);
         localStorage.setItem('logueado', true);
         localStorage.setItem('user', email);
         navigate('/home');
