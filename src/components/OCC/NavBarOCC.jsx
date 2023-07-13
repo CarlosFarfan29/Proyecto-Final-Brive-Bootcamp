@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon,ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import ModalHistorial from "./ModalHistorial";
-import {AiOutlineHistory} from "react-icons/ai";
+import { AiOutlineHistory } from "react-icons/ai";
 
-export function NavBarOCC({setIsLogueado}) {
+export function NavBarOCC({ setIsLogueado }) {
   const specialCharactersRegex = /^[a-zA-Z0-9\s]+$/; // Solo permite letras, números y espacios
 
   const navigate = useNavigate();
@@ -62,8 +62,10 @@ export function NavBarOCC({setIsLogueado}) {
             </a>
           </li>
         </ul>
-        <button onClick={() => handleCerrarSesion()} className="">
-          Cerrar sesión
+        <button onClick={() => handleCerrarSesion()} className="ml-8">
+          <div className="p-1 bg-yellow-500 hover:bg-yellow-600 transition-colors rounded-lg border-solid border-2 border-white">
+            <ArrowRightOnRectangleIcon className="w-8 h-8 text-white" />
+          </div>
         </button>
       </div>
 
