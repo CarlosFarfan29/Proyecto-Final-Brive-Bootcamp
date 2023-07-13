@@ -25,7 +25,7 @@ export function NavBar({setIsLogueado}){
         OCC Mundial
       </button>
 
-      <button onClick={() => handleCerrarSesion()} className="Terms">
+      <button id="btnCerrarSesion" onClick={() => handleCerrarSesion()} className="Terms">
         <div className='p-1 bg-yellow-500 hover:bg-yellow-600 transition-colors rounded-lg border-solid border-2 border-white'>
           <ArrowRightOnRectangleIcon className="w-8 h-8 text-white"/>
         </div>

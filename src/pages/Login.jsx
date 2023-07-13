@@ -52,11 +52,15 @@ const Login = ({setIsLogueado}) => {
       );
 
       if (response.ok) {
+
+        console.log("response: ", response);
+
+        const idUsuarioFromBack = await response.json();
         // Inicio de sesión exitoso
         // console.log("response.ok");
         await localStorage.setItem("logueado", true);
         await localStorage.setItem("user", email);
-        await localStorage.setItem("idUsuario", response.idUsuario);
+        await localStorage.setItem("idUsuario", idUsuarioFromBack);
 
         console.log("logueado: ", localStorage.getItem("logueado"));
         console.log("user: ", localStorage.getItem("user"));
@@ -194,6 +198,7 @@ const Login = ({setIsLogueado}) => {
           <input
             className="bg-orange-500 w-full mb-5 mt-10 py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-orange-600 transition-colors"
             type="submit"
+            id="login"
             value="Sign In"
           />
         </form>
