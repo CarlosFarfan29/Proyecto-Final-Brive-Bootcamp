@@ -56,6 +56,7 @@ const Login = ({setIsLogueado}) => {
         // console.log("response.ok");
         await localStorage.setItem("logueado", true);
         await localStorage.setItem("user", email);
+        await localStorage.setItem("idUsuario", response.idUsuario);
 
         console.log("logueado: ", localStorage.getItem("logueado"));
         console.log("user: ", localStorage.getItem("user"));
