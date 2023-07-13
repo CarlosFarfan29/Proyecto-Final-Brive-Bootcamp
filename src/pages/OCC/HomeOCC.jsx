@@ -1,16 +1,24 @@
 import "../../App.css";
 import { OrdenamientoRegistros } from "../../components/OCC/OrdenamientoRegistros";
 
-export function HomeOCC() {
+export function HomeOCC({empresa}) {
   return (
     <div className="AppOCC">
       <main className="p-[5%]">
         <h2 className="title-text flex items-center justify-center mb-6 font-black uppercase">
-          Empresas
+          Empresa buscada: {empresa ? empresa.nombreEmpresa : 'No se  ha buscado una empresa aún'}
         </h2>
-        <div className="w-full">
+
+        <h3 className="title-text flex items-center justify-center mb-6 font-black uppercase">
+          Total empleos: {empresa ? empresa.totalEmpleos : ''}
+        </h3>
+
+        <h5 className="title-text flex items-center justify-center mb-6 font-black uppercase">
+          Fecha búsqueda: {empresa ? empresa.fechaBusqueda : ''}
+        </h5>
+        {/*<div className="w-full">
           <OrdenamientoRegistros />
-        </div>
+        </div>*/}
       </main>
     </div>
   );
