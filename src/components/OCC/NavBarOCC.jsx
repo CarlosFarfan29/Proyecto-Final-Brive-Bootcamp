@@ -144,6 +144,11 @@ export function NavBarOCC({setIsLogueado, setEmpresa}) {
           <button
             type=""
             id="buscar"
+            disabled={formData.busqueda === ""
+            ? "disabled"
+            : !specialCharactersRegex.test(formData.busqueda)
+            ? "disabled"
+            : ""}
             onClick={handleSubmit}
             className="bg-terciary-color hover:bg-orange-color text-white px-4 py-2 rounded-md ml-2"
           >
