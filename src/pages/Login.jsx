@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Alerta from "../components/Alerta";
-import { AiOutlineEye, AiOutlineEyeInvisible, AiFillLock, AiFillMail} from "react-icons/ai";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiFillLock,
+  AiFillMail,
+} from "react-icons/ai";
 import { useNavigate } from "react-router";
 
 const Login = () => {
@@ -13,32 +18,66 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    try {
-      const response = await fetch("https://localhost:7219/api/User/validar-credenciales", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email,
-          password
-        })
+
+    // Validar campos vacíos
+    if (email.trim() === "" || password.trim() === "") {
+      setAlerta({
+        msg: "Por favor, completa todos los campos",
+        error: true,
       });
-  
+      return;
+    }
+
+    // Validar el formato del correo electrónico
+    if (!isValidEmail(email)) {
+      setAlerta({
+        msg: "Por favor, ingresa un correo electrónico válido",
+        error: true,
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "https://localhost:7219/api/User/validar-credenciales",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
+
       if (response.ok) {
         // Inicio de sesión exitoso
         localStorage.setItem('logueado', true);
         localStorage.setItem('user', email);
-        navigate('/home');
-
+        navigate("/home");
       } else {
-        // Error de inicio de sesión
         const data = await response.json();
-        setAlerta({
-          msg: data.errorMsg || "Error de inicio de sesión",
-          error: true,
-        });
+        if (response.status === 401) {
+          // Credenciales incorrectas
+          setAlerta({
+            msg: "Las credenciales ingresadas son incorrectas",
+            error: true,
+          });
+        } else if (response.status === 404) {
+          // Cuenta no existe
+          setAlerta({
+            msg: "La cuenta no existe. Por favor, verifica el correo electrónico ingresado",
+            error: true,
+          });
+        } else {
+          // Error de inicio de sesión
+          setAlerta({
+            msg: data.errorMsg || "Error de inicio de sesión",
+            error: true,
+          });
+        }
       }
     } catch (error) {
       // Error de red u otro error
@@ -49,10 +88,29 @@ const Login = () => {
       console.error(error);
     }
   };
-  
+
+  useEffect(() => {
+    const { msg } = alerta;
+    if (msg) {
+      const timer = setTimeout(() => {
+        setAlerta({});
+      }, 2000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [alerta]);
+
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
+
+  const isValidEmail = (email) => {
+    // Expresión regular para validar el formato del correo electrónico
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    return emailRegex.test(email);
+  };
 
   const { msg } = alerta;
 
@@ -83,7 +141,7 @@ const Login = () => {
               />
 
               <div className="absolute inset-y-0 left-0 flex mt-3 items-center px-2 text-gray-600 text-xl">
-                <AiFillMail/>
+                <AiFillMail />
               </div>
             </div>
           </div>
@@ -106,7 +164,7 @@ const Login = () => {
               />
 
               <div className="absolute inset-y-0 left-0 flex mt-3 items-center px-2 text-gray-600 text-xl">
-                <AiFillLock/>
+                <AiFillLock />
               </div>
 
               <div className="absolute inset-y-0 right-0 flex mt-3 items-center px-4 text-gray-600 text-xl">
@@ -126,8 +184,7 @@ const Login = () => {
           </div>
 
           <input
-            className="bg-orange-500 w-full mb-5 mt-10 py-3 text-white uppercase font-bold rounded 
-            hover:cursor-pointer hover:bg-orange-600 transition-colors" id="login"
+            className="bg-orange-500 w-full mb-5 mt-10 py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-orange-600 transition-colors"
             type="submit"
             value="Sign In"
           />
