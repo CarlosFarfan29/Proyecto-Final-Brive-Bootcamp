@@ -1,7 +1,18 @@
 import {useNavigate} from 'react-router-dom';
 
-export function NavBar(){
+export function NavBar({setIsLogueado}){
     const navigate = useNavigate();
+
+
+    const handleCerrarSesion = async (e) => {
+      
+  
+      await localStorage.clear();
+  
+  
+      setIsLogueado(localStorage.getItem("logueado"));
+      // return redirect("/home");
+    };
 
     return(
     <header className="Header">
@@ -12,6 +23,10 @@ export function NavBar(){
             Terms + Conditions</button>
             <button onClick={() => navigate("/occ")} className="Terms">
         OCC Mundial
+      </button>
+
+      <button onClick={() => handleCerrarSesion()} className="Terms">
+        Cerrar sesión
       </button>
 
     </header>    

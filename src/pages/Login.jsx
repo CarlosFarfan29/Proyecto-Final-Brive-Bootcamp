@@ -6,15 +6,14 @@ import {
   AiFillLock,
   AiFillMail,
 } from "react-icons/ai";
-import { useNavigate } from "react-router";
+import { useNavigate, redirect } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setIsLogueado}) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alerta, setAlerta] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,11 +53,19 @@ const Login = () => {
 
       if (response.ok) {
         // Inicio de sesión exitoso
-        localStorage.setItem('logueado', true);
-        localStorage.setItem('user', email);
-        navigate("/home");
+        // console.log("response.ok");
+        await localStorage.setItem("logueado", true);
+        await localStorage.setItem("user", email);
+
+        console.log("logueado: ", localStorage.getItem("logueado"));
+        console.log("user: ", localStorage.getItem("user"));
+
+
+        setIsLogueado(localStorage.getItem("logueado"));
+        return redirect("/home");
       } else {
         const data = await response.json();
+        // console.log("data: ", data);
         if (response.status === 401) {
           // Credenciales incorrectas
           setAlerta({

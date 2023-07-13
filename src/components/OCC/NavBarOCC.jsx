@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ModalHistorial from "./ModalHistorial";
 import {AiOutlineHistory} from "react-icons/ai";
 
-export function NavBarOCC() {
+export function NavBarOCC({setIsLogueado}) {
   const specialCharactersRegex = /^[a-zA-Z0-9\s]+$/; // Solo permite letras, números y espacios
 
   const navigate = useNavigate();
@@ -36,6 +36,13 @@ export function NavBarOCC() {
     // const resp = await getVacantesDeEmpresa("Empresa de prueba");
   };
 
+  const handleCerrarSesion = async (e) => {
+    await localStorage.clear();
+
+    setIsLogueado(localStorage.getItem("logueado"));
+    // return redirect("/home");
+  };
+
   return (
     <header className="bg-dark-color">
       <div className="mx-auto flex items-center justify-between py-3 pl-10 pr-10">
@@ -55,6 +62,9 @@ export function NavBarOCC() {
             </a>
           </li>
         </ul>
+        <button onClick={() => handleCerrarSesion()} className="">
+          Cerrar sesión
+        </button>
       </div>
 
       <nav className="flex items-center justify-between bg-primary-color py-8 pl-10 pr-10">
@@ -89,7 +99,8 @@ export function NavBarOCC() {
             )}
           </div>
           <button
-            type="submit" id="buscar"
+            type="submit"
+            id="buscar"
             className="bg-terciary-color hover:bg-orange-color text-white px-4 py-2 rounded-md ml-2"
           >
             Buscar
@@ -106,7 +117,11 @@ export function NavBarOCC() {
           <div className="text-3xl">
             <AiOutlineHistory />
           </div>
-          <button className="text-2xl" id="verHistorial" onClick={() => setShowModalHistorial(true)}>
+          <button
+            className="text-2xl"
+            id="verHistorial"
+            onClick={() => setShowModalHistorial(true)}
+          >
             Ver Historial
           </button>
         </div>
