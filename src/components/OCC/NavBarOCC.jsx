@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MagnifyingGlassIcon,ArrowRightOnRectangleIcon, ArrowUturnLeftIcon } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import {
+  MagnifyingGlassIcon,
+  ArrowRightOnRectangleIcon,
+  ArrowUturnLeftIcon,
+} from "@heroicons/react/24/solid";
 import ModalHistorial from "./ModalHistorial";
 import { AiOutlineHistory } from "react-icons/ai";
 
 export function NavBarOCC({ setIsLogueado, setEmpresa }) {
   const specialCharactersRegex = /^[a-zA-Z0-9\s]+$/; // Solo permite letras, números y espacios
   const regex = /^\s*$/;
-
 
   const navigate = useNavigate();
   const [isInputTouched, setIsInputTouched] = useState(false);
@@ -110,10 +112,14 @@ export function NavBarOCC({ setIsLogueado, setEmpresa }) {
   return (
     <header className="bg-dark-color">
       <div className="mx-auto flex-wrap gap-4 flex items-center justify-evenly py-3 pl-10 pr-10">
-
         <div className="text-white flex justify-between items-center gap-2">
-          <ArrowUturnLeftIcon className="w-5 h-5"/>
-          <button onClick={handleClick}>Regresar</button>
+          <button
+            onClick={handleClick}
+            className="bg-transparent text-white text-sm font-bold border border-white py-2 px-4 rounded-full transition duration-300 hover:bg-white hover:text-purple-500"
+          >
+            <ArrowUturnLeftIcon className="w-4 h-4 inline-block mr-1" />
+            Regresar
+          </button>
         </div>
 
         <ul className="flex space-x-4 ml-auto">
@@ -132,7 +138,11 @@ export function NavBarOCC({ setIsLogueado, setEmpresa }) {
             </a>
           </li>
         </ul>
-        <button id="btnCerrarSesionOcc" onClick={() => handleCerrarSesion()} className="ml-8">
+        <button
+          id="btnCerrarSesionOcc"
+          onClick={() => handleCerrarSesion()}
+          className="ml-8"
+        >
           <div className="p-1 bg-yellow-500 hover:bg-yellow-600 transition-colors rounded-lg border-solid border-2 border-white">
             <ArrowRightOnRectangleIcon className="w-8 h-8 text-white" />
           </div>
@@ -161,7 +171,10 @@ export function NavBarOCC({ setIsLogueado, setEmpresa }) {
             />
 
             {isInputTouched && (
-              <span id="mensajeBusqueda" className="absolute top-full left-0 text-error text-xs mt-1">
+              <span
+                id="mensajeBusqueda"
+                className="absolute top-full left-0 text-error text-xs mt-1"
+              >
                 {formData.busqueda === "" || regex.test(formData.busqueda)
                   ? "El campo de búsqueda es requerido."
                   : !specialCharactersRegex.test(formData.busqueda)
