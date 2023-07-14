@@ -7,7 +7,7 @@ export function HistorialTabla({ registro, index }) {
 
   return (
     <>
-      <tr className="border border-slate-500" key={registro.id}>
+      <tr className="border border-slate-500">
         <td className="p-2 border border-slate-500">{index + 1}</td>
         <td className="p-2 border border-slate-500">{registro.nombreEmpresa}</td>
         <td className="p-2 border border-slate-500">{registro.totalEmpleos}</td>
