@@ -11,7 +11,7 @@ export function NavBarOCC({ setIsLogueado, setEmpresa }) {
 
 
   const navigate = useNavigate();
-  const [isInputTouched, setIsInputTouched] = useState(false);
+  const [isInputTouched, setIsInputTouched] = useState(true);
 
   const [showModalHistorial, setShowModalHistorial] = useState(false);
 
