@@ -23,7 +23,7 @@ const Login = ({setIsLogueado}) => {
       return;
     }
 
-    //Validar el formato del email
+    //Validar el formato del correo electronico
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (!emailRegex.test(email)) {
       setAlerta('Ingrese un correo electrónico válido');
@@ -46,8 +46,6 @@ const Login = ({setIsLogueado}) => {
         }
       );
 
-      const data = await response.json();
-
       if (response.ok) {
 
         console.log("response: ", response);
@@ -65,14 +63,21 @@ const Login = ({setIsLogueado}) => {
 
         setIsLogueado(localStorage.getItem("logueado"));
         return redirect("/home");
-      } else if (response.status === 400) {
-        setAlerta('El correo electrónico no está registrado');
+      } else {
+        const data = await response.json();
+        // console.log("data: ", data);
+        if (response.status === 400) {
+          setAlerta(
+            "La cuenta no existe. Por favor, verifica el correo electrónico ingresado"
+          );
+        } 
       }
     } catch (error) {
-      setAlerta('Las credenciales ingresadas son incorrectas');
+      setAlerta("Las credenciales ingresadas son incorrectas");
+      console.error(error);
     }
   };
-  
+
   //Mostrar la alerta por 2 segundos
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -83,8 +88,8 @@ const Login = ({setIsLogueado}) => {
       clearTimeout(timer);
     };
   }, [alerta]);
-  
-  //Función para que el password sea visible
+
+  //Función para hacer visible la contraseña
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }

@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { HistorialTabla } from "./HistorialTabla";
-import {AiFillCloseSquare} from "react-icons/ai";
+import { AiFillCloseSquare } from "react-icons/ai";
 
 const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
-  const [totalVacantes, setTotalVacantes] = useState(""); // para asc o desc del select "Total vacantes"
-  const [nombreEmpresa, setNombreEmpresa] = useState(""); // para asc o desc del select "Orden alfabetico"
-  const [fecha, setFecha] = useState(""); // para asc o desc del select "Fecha de creación"
+  const [registros, setRegistros] = useState([]);
+  const [totalVacantes, setTotalVacantes] = useState("");
+  const [nombreEmpresa, setNombreEmpresa] = useState("");
+  const [fecha, setFecha] = useState("");
 
-  const [registros, setRegistros] = useState([
-    { id: 1, totalVacantes: 10, nombreEmpresa: "Famsa", fecha: "2022-07-22" },
-    { id: 2, totalVacantes: 50, nombreEmpresa: "Walmart", fecha: "2022-02-01" },
-    { id: 3, totalVacantes: 29, nombreEmpresa: "Brive", fecha: "2022-03-05" },
-    { id: 4, totalVacantes: 81, nombreEmpresa: "OCCMundial", fecha: "2022-03-01"},
-    { id: 5, totalVacantes: 2, nombreEmpresa: "RopaShop", fecha: "2022-05-01" },
-    { id: 6, totalVacantes: 22, nombreEmpresa: "Empresa", fecha: "2022-06-01" },
-    { id: 7, totalVacantes: 66, nombreEmpresa: "Facebook", fecha: "2022-06-01"},
-    { id: 8, totalVacantes: 89, nombreEmpresa: "Youtube", fecha: "2022-07-01" },
-  ]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://localhost:7219/api/History/historial/` +
+            localStorage.getItem("idUsuario")
+        );
+        const data = await response.json();
+        setRegistros(data);
+      } catch (error) {
+        console.error("Error fetching historial:", error);
+      }
+    };
+
+    if (showModalHistorial) {
+      fetchData();
+    }
+  }, [showModalHistorial]);
 
   /* Inicio Logica Paginación */
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,6 +40,7 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
     setCurrentPage(pageNumber);
   };
   /* ------------------------ */
+
   const handleTotalVacantes = (event) => {
     console.log("filtroTotalVacantes");
     setTotalVacantes(event.target.value);
@@ -61,8 +71,7 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
       if (nombreEmpresa !== "") {
         const ordenNombreEmpresa = nombreEmpresa === "asc" ? 1 : -1;
         if (a.nombreEmpresa !== b.nombreEmpresa) {
-          comparacion =
-            a.nombreEmpresa.localeCompare(b.nombreEmpresa) * ordenNombreEmpresa;
+          comparacion = a.nombreEmpresa.localeCompare(b.nombreEmpresa) * ordenNombreEmpresa;
         }
       }
 
@@ -83,19 +92,6 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
   useEffect(() => {
     handleSearch();
   }, [totalVacantes, nombreEmpresa, fecha]); // dependencias necesarias para activar el ordenamiento
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // const fetchData = async () => {
-  //   // Aquí debes implementar tu lógica para obtener los datos de la API
-  //   // Puedes utilizar fetch, axios u otra librería para hacer la solicitud
-  //   // y luego actualizar el estado de `data` con los datos obtenidos
-  //   const response = await fetch('https://api.example.com/data');
-  //   const data = await response.json();
-  //   setData(data);
-  // };
 
   return (
     <div
@@ -122,9 +118,8 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
         >
           <div>
             <div className="mt-3 text-center sm:mt-5">
-              
               <h3 className="text-orange-500 font-black text-2xl mb-14 uppercase">
-                Historial mis Búsquedas
+                Historial de Búsquedas
               </h3>
               <div className="flex items-center mb-4">
                 <label htmlFor="selectTotalVacantes" className="mr-2">
@@ -176,21 +171,16 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
                       <th className="p-2">N°</th>
                       <th>Nombre de la empresa</th>
                       <th>Total de empleos</th>
-                      <th>Fecha de Busqueda</th>
+                      <th>Fecha de búsqueda</th>
                     </tr>
                   </thead>
                   <tbody className="border-collapse border border-slate-500">
-                    {/*data.map((item) => (
-                      <tr key={item.id}>
-                        <td>{item.column1}</td>
-                        <td>{item.column2}</td>
-                        <td>{item.column3}</td>
-                        <td>{item.column4}</td>
-                      </tr>
-                    ))*/}
-
-                    {currentItems.map((registro) => (
-                      <HistorialTabla key={registro.id} registro={registro} />
+                    {currentItems.map((registro, index) => (
+                      <HistorialTabla
+                        key={index}
+                        registro={registro}
+                        index={index}
+                      />
                     ))}
                   </tbody>
                 </table>
@@ -219,11 +209,12 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
                   </button>
                 </div>
 
-                <button className="absolute top-0 right-0 flex mt-3 items-center px-4 font-black text-red-600 text-5xl"
-
-              onClick={() => setShowModalHistorial(false)}>
-                <AiFillCloseSquare/>
-              </button>
+                <button
+                  className="absolute top-0 right-0 flex mt-3 items-center px-4 font-black text-red-600 text-5xl"
+                  onClick={() => setShowModalHistorial(false)}
+                >
+                  <AiFillCloseSquare />
+                </button>
               </div>
             </div>
           </div>
