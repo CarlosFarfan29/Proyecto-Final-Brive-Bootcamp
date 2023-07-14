@@ -18,17 +18,19 @@ const Login = ({setIsLogueado}) => {
     e.preventDefault();
 
     // Validar campos vacíos
-    if (email.trim() === "" || password.trim() === "") {
+    if (!email || !password) {
       setAlerta("Por favor, completa todos los campos")
       return;
     }
 
-    // Validar el formato del correo electrónico
-    if (!isValidEmail(email)) {
-      setAlerta("Por favor, ingresa un correo electrónico válido")
+    //Validar el formato del email
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      setAlerta('Ingrese un correo electrónico válido');
       return;
     }
 
+    //Llamado de la API
     try {
       const response = await fetch(
         "https://localhost:7219/api/User/validar-credenciales",
@@ -43,6 +45,8 @@ const Login = ({setIsLogueado}) => {
           }),
         }
       );
+
+      const data = await response.json();
 
       if (response.ok) {
 
@@ -61,30 +65,15 @@ const Login = ({setIsLogueado}) => {
 
         setIsLogueado(localStorage.getItem("logueado"));
         return redirect("/home");
-      } else {
-        const data = await response.json();
-        // console.log("data: ", data);
-        if (response.status === 401) {
-          // Credenciales incorrectas
-          setAlerta("Las credenciales ingresadas son incorrectas");
-        } else if (response.status === 404) {
-          // Cuenta no existe
-          setAlerta(
-            "La cuenta no existe. Por favor, verifica el correo electrónico ingresado"
-          );
-        } else {
-          // Error de inicio de sesión
-          setAlerta(data.errorMsg || "Error de inicio de sesión");
-        }
-        
+      } else if (response.status === 400) {
+        setAlerta('El correo electrónico no está registrado');
       }
     } catch (error) {
-      // Error de red u otro error
-      setAlerta("Ocurrió un error al realizar la solicitud");
-      console.error(error);
+      setAlerta('Las credenciales ingresadas son incorrectas');
     }
   };
-
+  
+  //Mostrar la alerta por 2 segundos
   useEffect(() => {
     const timer = setTimeout(() => {
       setAlerta("");
@@ -94,16 +83,11 @@ const Login = ({setIsLogueado}) => {
       clearTimeout(timer);
     };
   }, [alerta]);
-
+  
+  //Función para que el password sea visible
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
-
-  const isValidEmail = (email) => {
-    // Expresión regular para validar el formato del correo electrónico
-    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    return emailRegex.test(email);
-  };
 
   return (
     <>
@@ -114,7 +98,7 @@ const Login = ({setIsLogueado}) => {
           <p className="from-red-400 to-red-600 bg-gradient-to-br text-center p-3 rounded-xl uppercase text-white font-bold text-sm">{alerta}</p>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="my-8">
             <label
               className="text-gray-600 block text-lg font-bold"
@@ -129,7 +113,6 @@ const Login = ({setIsLogueado}) => {
                 id="email"
                 placeholder="username@gmail.com"
                 value={email}
-                required
                 onChange={(e) => setEmail(e.target.value)}
               />
 
