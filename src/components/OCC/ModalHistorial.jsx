@@ -4,7 +4,7 @@ import { AiFillCloseSquare } from "react-icons/ai";
 
 const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
   const [registros, setRegistros] = useState([]);
-  const [totalVacantes, setTotalVacantes] = useState("");
+  const [totalEmpleos, setTotalEmpleos] = useState("");
   const [nombreEmpresa, setNombreEmpresa] = useState("");
   const [fecha, setFecha] = useState("");
 
@@ -16,7 +16,9 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
             localStorage.getItem("idUsuario")
         );
         const data = await response.json();
+        // console.log("data: ", data);
         setRegistros(data);
+        // console.log("Registros: ", registros);
       } catch (error) {
         console.error("Error fetching historial:", error);
       }
@@ -41,9 +43,10 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
   };
   /* ------------------------ */
 
-  const handleTotalVacantes = (event) => {
-    console.log("filtroTotalVacantes");
-    setTotalVacantes(event.target.value);
+  const handleTotalEmpleos = (event) => {
+    // console.log("filtroTotalEmpleos");
+    // console.log(event.target.value);
+    setTotalEmpleos(event.target.value);
   };
 
   const handleNombreEmpresa = (event) => {
@@ -60,11 +63,11 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
     registrosOrdenados.sort((a, b) => {
       let comparacion = 0;
 
-      if (totalVacantes !== "") {
-        const ordenTotalVacantes = totalVacantes === "asc" ? 1 : -1;
-        if (a.totalVacantes !== b.totalVacantes) {
+      if (totalEmpleos !== "") {
+        const ordenTotalEmpleos = totalEmpleos === "asc" ? 1 : -1;
+        if (a.totalEmpleos !== b.totalEmpleos) {
           comparacion =
-            (a.totalVacantes - b.totalVacantes) * ordenTotalVacantes;
+            (a.totalEmpleos - b.totalEmpleos) * ordenTotalEmpleos;
         }
       }
 
@@ -78,7 +81,13 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
       if (fecha !== "") {
         const ordenFecha = fecha === "asc" ? 1 : -1;
         if (a.fecha !== b.fecha) {
-          comparacion = (new Date(a.fecha) - new Date(b.fecha)) * ordenFecha;
+          const partsA = a.fecha.split("/"); // Dividir la cadena en partes
+          const partsB = b.fecha.split("/"); // Dividir la cadena en partes
+          
+
+          comparacion = (new Date(partsA[2], partsA[1] - 1, partsA[0]) - new Date(partsB[2], partsB[1] - 1, partsB[0])) * ordenFecha;
+
+          // comparacion = (new Date(a.fecha) - new Date(b.fecha)) * ordenFecha;
         }
       }
 
@@ -91,7 +100,7 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
   // Llamar a handleSearch para ordenar los registros
   useEffect(() => {
     handleSearch();
-  }, [totalVacantes, nombreEmpresa, fecha]); // dependencias necesarias para activar el ordenamiento
+  }, [totalEmpleos, nombreEmpresa, fecha]); // dependencias necesarias para activar el ordenamiento
 
   return (
     <div
@@ -122,14 +131,14 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
                 Historial de Búsquedas
               </h3>
               <div className="flex items-center mb-4">
-                <label htmlFor="selectTotalVacantes" className="mr-2">
+                <label htmlFor="selectTotalEmpleos" className="mr-2">
                   Total de vacantes
                 </label>
                 <select
-                  id="selectTotalVacantes"
+                  id="selectTotalEmpleos"
                   className="p-2 bg-secondary-color hover:bg-primary-color rounded-md mr-3 text-white"
-                  value={totalVacantes}
-                  onChange={handleTotalVacantes}
+                  value={totalEmpleos}
+                  onChange={handleTotalEmpleos}
                 >
                   <option value="">...</option>
                   <option value="asc">asc</option>
@@ -177,7 +186,7 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
                   <tbody className="border-collapse border border-slate-500">
                     {currentItems.map((registro, index) => (
                       <HistorialTabla
-                        key={index}
+                        
                         registro={registro}
                         index={index}
                       />
