@@ -7,6 +7,8 @@ import { AiOutlineHistory } from "react-icons/ai";
 
 export function NavBarOCC({ setIsLogueado, setEmpresa }) {
   const specialCharactersRegex = /^[a-zA-Z0-9\s]+$/; // Solo permite letras, números y espacios
+  const regex = /^\s*$/;
+
 
   const navigate = useNavigate();
   const [isInputTouched, setIsInputTouched] = useState(false);
@@ -77,6 +79,7 @@ export function NavBarOCC({ setIsLogueado, setEmpresa }) {
   }
 
   const handleInputChange = (e) => {
+    setIsInputTouched(true);
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -158,8 +161,8 @@ export function NavBarOCC({ setIsLogueado, setEmpresa }) {
             />
 
             {isInputTouched && (
-              <span className="absolute top-full left-0 text-error text-xs mt-1">
-                {formData.busqueda === ""
+              <span id="mensajeBusqueda" className="absolute top-full left-0 text-error text-xs mt-1">
+                {formData.busqueda === "" || regex.test(formData.busqueda)
                   ? "El campo de búsqueda es requerido."
                   : !specialCharactersRegex.test(formData.busqueda)
                   ? "El campo de búsqueda no debe tener caracteres especiales."
