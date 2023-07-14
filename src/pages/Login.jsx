@@ -23,9 +23,7 @@ const Login = ({setIsLogueado}) => {
       return;
     }
 
-<<<<<<< HEAD
     //Validar el formato del correo electronico
-=======
     const minimo5 = /^.{5,}$/
      // Validar que la password tenga por lo menos 5 caracteres
      if (!minimo5.test(password)) {
@@ -34,7 +32,6 @@ const Login = ({setIsLogueado}) => {
     }
 
     //Validar el formato del email
->>>>>>> a7eecb8f50316fd89f0f4f3676495d80c5e0a789
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (!emailRegex.test(email)) {
       setAlerta('Ingrese un correo electrónico válido');
@@ -57,11 +54,8 @@ const Login = ({setIsLogueado}) => {
         }
       );
 
-<<<<<<< HEAD
-=======
       // const data = await response.json();
 
->>>>>>> a7eecb8f50316fd89f0f4f3676495d80c5e0a789
       if (response.ok) {
 
         console.log("response: ", response);
