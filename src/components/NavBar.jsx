@@ -21,7 +21,7 @@ export function NavBar({setIsLogueado}){
         className='Logo'/>
         <button onClick={() => navigate("/conditions")} className='Terms'>
             Terms + Conditions</button>
-            <button onClick={() => navigate("/occ")} className="Terms">
+            <button id="goToOCC" onClick={() => navigate("/occ")} className="Terms">
         OCC Mundial
       </button>
 

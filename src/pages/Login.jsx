@@ -23,7 +23,18 @@ const Login = ({setIsLogueado}) => {
       return;
     }
 
+<<<<<<< HEAD
     //Validar el formato del correo electronico
+=======
+    const minimo5 = /^.{5,}$/
+     // Validar que la password tenga por lo menos 5 caracteres
+     if (!minimo5.test(password)) {
+      setAlerta('Contraseña demasiado corta');
+      return;
+    }
+
+    //Validar el formato del email
+>>>>>>> a7eecb8f50316fd89f0f4f3676495d80c5e0a789
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (!emailRegex.test(email)) {
       setAlerta('Ingrese un correo electrónico válido');
@@ -46,6 +57,11 @@ const Login = ({setIsLogueado}) => {
         }
       );
 
+<<<<<<< HEAD
+=======
+      // const data = await response.json();
+
+>>>>>>> a7eecb8f50316fd89f0f4f3676495d80c5e0a789
       if (response.ok) {
 
         console.log("response: ", response);
@@ -82,7 +98,7 @@ const Login = ({setIsLogueado}) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setAlerta("");
-    }, 2000);
+    }, 6000);
 
     return () => {
       clearTimeout(timer);
@@ -100,7 +116,7 @@ const Login = ({setIsLogueado}) => {
         <h1 className="text-indigo-700 font-black text-4xl mb-14">Login</h1>
 
         {alerta && (
-          <p className="from-red-400 to-red-600 bg-gradient-to-br text-center p-3 rounded-xl uppercase text-white font-bold text-sm">{alerta}</p>
+          <p id="alerta" className="from-red-400 to-red-600 bg-gradient-to-br text-center p-3 rounded-xl uppercase text-white font-bold text-sm">{alerta}</p>
         )}
 
         <form onSubmit={handleSubmit} noValidate>
