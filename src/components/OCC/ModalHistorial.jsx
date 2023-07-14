@@ -127,51 +127,57 @@ const ModalHistorial = ({ showModalHistorial, setShowModalHistorial }) => {
         >
           <div>
             <div className="mt-3 text-center sm:mt-5">
-              <h3 className="text-orange-500 font-black text-2xl mb-14 uppercase">
+              <h3 className="text-orange-500 font-black text-2xl mb-14 uppercase w-3/5 m-auto">
                 Historial de Búsquedas
               </h3>
-              <div className="flex items-center mb-4">
-                <label htmlFor="selectTotalEmpleos" className="mr-2">
-                  Total de vacantes
-                </label>
-                <select
-                  id="selectTotalEmpleos"
-                  className="p-2 bg-secondary-color hover:bg-primary-color rounded-md mr-3 text-white"
-                  value={totalEmpleos}
-                  onChange={handleTotalEmpleos}
-                >
-                  <option value="">...</option>
-                  <option value="asc">asc</option>
-                  <option value="desc">desc</option>
-                </select>
+              <div className="flex items-center mb-4 flex-wrap gap-5 justify-center">
+                <div>
+                  <label htmlFor="selectTotalEmpleos" className="mr-2">
+                    Total de vacantes
+                  </label>
+                  <select
+                    id="selectTotalEmpleos"
+                    className="p-2 bg-secondary-color hover:bg-primary-color rounded-md mr-3 text-white"
+                    value={totalEmpleos}
+                    onChange={handleTotalEmpleos}
+                  >
+                    <option value="">...</option>
+                    <option value="asc">asc</option>
+                    <option value="desc">desc</option>
+                  </select>
+                </div>
 
-                <label htmlFor="selectNombreEmpresa" className="mr-2">
-                  Nombre de la empresa
-                </label>
-                <select
-                  id="selectNombreEmpresa"
-                  className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md text-white"
-                  value={nombreEmpresa}
-                  onChange={handleNombreEmpresa}
-                >
-                  <option value="">...</option>
-                  <option value="asc">asc</option>
-                  <option value="desc">desc</option>
-                </select>
+                <div>
+                  <label htmlFor="selectNombreEmpresa" className="mr-2">
+                    Nombre de la empresa
+                  </label>
+                  <select
+                    id="selectNombreEmpresa"
+                    className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md text-white"
+                    value={nombreEmpresa}
+                    onChange={handleNombreEmpresa}
+                  >
+                    <option value="">...</option>
+                    <option value="asc">asc</option>
+                    <option value="desc">desc</option>
+                  </select>
+                </div>
 
-                <label htmlFor="selectFechaBusqueda" className="mr-2">
-                  Fecha de búsqueda
-                </label>
-                <select
-                  id="selectFechaBusqueda"
-                  className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md text-white"
-                  value={fecha}
-                  onChange={handleFecha}
-                >
-                  <option value="">...</option>
-                  <option value="asc">asc</option>
-                  <option value="desc">desc</option>
-                </select>
+                <div>
+                  <label htmlFor="selectFechaBusqueda" className="mr-2">
+                    Fecha de búsqueda
+                  </label>
+                  <select
+                    id="selectFechaBusqueda"
+                    className="p-2 mr-3 bg-secondary-color hover:bg-primary-color rounded-md text-white"
+                    value={fecha}
+                    onChange={handleFecha}
+                  >
+                    <option value="">...</option>
+                    <option value="asc">asc</option>
+                    <option value="desc">desc</option>
+                  </select>
+                </div>
               </div>
               <div className="mt-2">
                 <table className="min-w-full border-collapse border border-slate-500 my-10">
